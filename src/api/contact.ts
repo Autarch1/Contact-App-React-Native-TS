@@ -29,3 +29,13 @@ export const addContact = async (input : Contact) =>{
     }
 }
 
+export const editContact = async (input : Contact) =>{
+    try {
+        const response: AxiosResponse<Contact> = await axiosInstance.put(`/contact/${input.id}`, input)
+        return response.data
+    }catch(error){
+        console.error("Error while editing contact:", error);
+        throw new Error("Error while editing contact");
+    }
+}
+

@@ -22,12 +22,11 @@ export const Input = (props: Props<any>) => {
                 onBlur={onBlur}
                 placeholderTextColor={'black'}
                 style={{
-                  borderWidth: 1,
-                  borderColor: 'gray',
+                  borderBottomWidth: 1,
                   minWidth: 280,
                   padding: 5,
                   margin : 10,
-                  color: 'black'
+                  fontSize : 20
                 }}
               />
               <Text style={{color: 'red', fontSize: 16}}>

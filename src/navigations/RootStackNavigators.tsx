@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ContactListScreen from "../screens/ContactListScreen";
 import { RootStackParamList } from "./type";
 import AddContactScreen from "../screens/ContactAddScreen";
+import ContactListScreen from "../screens/ContactListScreen";
+import ContactEditScreen from "../screens/ContactEditScreen";
 
 
 
@@ -15,6 +16,7 @@ export const RootStackNavigators = () => {
         >
             <Stack.Screen name="ContactListScreen" component={ContactListScreen} />
             <Stack.Screen name="ContactAddScreen" component={AddContactScreen} />
+            <Stack.Screen name="ContactEditScreen" component={ContactEditScreen} />
         </Stack.Navigator>
     )
 }

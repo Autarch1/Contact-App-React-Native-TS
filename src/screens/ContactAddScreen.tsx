@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Touchable } from 'react-native';
+import { View, Text, Button, StyleSheet, } from 'react-native';
 import { useContact } from './hooks/useContact';
 import Input from '../app/input';
-import { RootStackScreenProps } from '../navigations/type';
 import { useNavigation } from '@react-navigation/native';
+import { RootStackScreenProps } from '../navigations/type';
 
-
-type Props = RootStackScreenProps<'ContactAddScreen'>;
+type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 const AddContactScreen = () => {
   const { control, addContactHandler, setValue, reset } = useContact();
@@ -22,32 +21,32 @@ const AddContactScreen = () => {
   };
 
   return (
-    <View style={{backgroundColor : 'white',
+    <View style={{
     padding : 10,
     margin : 10,
     gap : 10,
     marginVertical : 100
     }}>
       <View>
-      <Text>Name:</Text>
+      <Text style={styles.text}>Name:</Text>
       <Input 
         control={control}
         name='name'
       />
 
-      <Text>Email:</Text>
+      <Text style={styles.text}>Email:</Text>
       <Input
         control={control}
         name='email'
       />
 
-      <Text>Phone:</Text>
+      <Text style={styles.text}>Phone:</Text>
       <Input
         control={control}
         name='phone'
       />
 
-      <Text>Address:</Text>
+      <Text  style={styles.text}>Address:</Text>
       <Input
         control={control}
         name='address'
@@ -66,8 +65,7 @@ const AddContactScreen = () => {
 
 const styles = StyleSheet.create({
   text  : {
-    color : 'white',
-    fontSize : 20,
+    fontSize : 18,
   }
 })
 export default AddContactScreen;

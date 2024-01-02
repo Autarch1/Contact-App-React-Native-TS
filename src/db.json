@@ -1,0 +1,18 @@
+{
+  "contact": [
+    {
+      "id": 1,
+      "name": "Yephone Aung",
+      "email": "yephoneaung33002@gmail.com",
+      "phone": "09777777777",
+      "address": "Yangon"
+    },
+    {
+      "id": 62322,
+      "name": "PhyoWai Yan",
+      "email": "Phyolay42@gmail.com",
+      "phone": "0921221421",
+      "address": "No 21421"
+    }
+  ]
+}

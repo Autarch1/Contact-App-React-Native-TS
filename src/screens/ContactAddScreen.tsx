@@ -27,6 +27,12 @@ const AddContactScreen = () => {
     gap : 10,
     marginVertical : 100
     }}>
+      <View style={{alignItems : 'flex-start', borderWidth : 1, borderRadius : 20, width : '10%', marginVertical : 20}}>
+      <Button
+        title="<"
+        onPress={() => navigations.navigate('ContactListScreen')}
+      />
+      </View>
       <View>
       <Text style={styles.text}>Name:</Text>
       <Input 
@@ -54,10 +60,7 @@ const AddContactScreen = () => {
 
       <Button title="Add Contact" onPress={handleAddContact} />
 
-      <Button
-        title="Cancel"
-        onPress={() => navigations.navigate('ContactListScreen')}
-      />
+      
     </View>
     </View>
   );

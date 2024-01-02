@@ -52,9 +52,9 @@ const ContactListScreen = () => {
   const groupedContacts = sortAndGroupContacts(filterContact || data);
 
   return (
-    <View>
+    <View style={{flex : 1}}>
       <ContactSearch handleSearch={handleSearch} />
-      <View style={{ padding: 10}}>
+      <View style={{ padding: 10 }}>
         <FlatList
           data={groupedContacts}
           renderItem={({ item }) => (

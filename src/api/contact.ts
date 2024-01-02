@@ -39,3 +39,12 @@ export const editContact = async (input : Contact) =>{
     }
 }
 
+export const deleteContact = async (id : number) =>{
+    try {
+        const response: AxiosResponse<Contact> = await axiosInstance.delete(`/contact/${id}`)
+        return response.data
+    }catch(error){
+        console.error("Error while deleting contact:", error);
+        throw new Error("Error while deleting contact");
+    }
+}

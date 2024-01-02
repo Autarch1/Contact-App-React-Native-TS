@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addContact, editContact, getContacts } from '../../api/contact';
+import { addContact, deleteContact, editContact, getContacts } from '../../api/contact';
 import z from 'zod';
 import { queryClient } from '../../utils/queryClient';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -63,6 +63,22 @@ export const useContact = () => {
         }
     })
 
+    const { mutateAsync: deleteContactById } = useMutation({
+        mutationKey: ['deleteContact'],
+        mutationFn: deleteContact,
+        onError: error => {
+            console.log(error);
+        },
+        onSuccess: async data => {
+            return await queryClient.invalidateQueries({ queryKey: ['contacts'] });
+        },
+    });
+
+    const onDeleteHandler = async (id: number) => {
+        return deleteContactById(id);
+    };
+    
+
     const onSubmitHandler: SubmitHandler<FormField> = async value => {
         const id = Math.floor(Math.random() * 100000) + 1;
 
@@ -93,6 +109,7 @@ export const useContact = () => {
         watch,
         data,
         reset,
-        updateContatHandler
+        updateContatHandler,
+        onDeleteHandler,
     };
 };

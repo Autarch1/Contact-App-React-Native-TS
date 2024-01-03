@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, StyleSheet } from 'react-native';
-import { useContact } from './hooks/useContact';
+/* eslint-disable no-catch-shadow */
+/* eslint-disable @typescript-eslint/no-shadow */
+import React, {useEffect, useState} from 'react';
+import {View, Text, Button, ActivityIndicator, StyleSheet} from 'react-native';
+import {useContact} from './hooks/useContact';
 import Input from '../app/input';
-import { RootStackScreenProps } from '../navigations/type';
-import { useNavigation } from '@react-navigation/native';
+import {RootStackScreenProps} from '../navigations/type';
+import {useNavigation} from '@react-navigation/native';
 
 type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 
-const EditContactScreen = ({ route }: { route: any }) => {
-  const { id } = route.params;
-  const { control, setValue, watch, reset, data, updateContatHandler, onDeleteHandler } = useContact();
+const EditContactScreen = ({route}: {route: any}) => {
+  const {id} = route.params;
+  const {control, setValue, data, updateContatHandler, onDeleteHandler} =
+    useContact();
   const navigations = useNavigation<Navigation>();
-  const selectedContact = data?.find((contact) => contact.id === id);
+  const selectedContact = data?.find(contact => contact.id === id);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +27,6 @@ const EditContactScreen = ({ route }: { route: any }) => {
     }
   }, [selectedContact, setValue]);
 
-    
   const handleUpdateContact = async () => {
     try {
       setIsLoading(true);
@@ -49,15 +51,17 @@ const EditContactScreen = ({ route }: { route: any }) => {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
-        <Text style={styles.avatarText}>{selectedContact?.name[0].toUpperCase()}</Text>
+        <Text style={styles.avatarText}>
+          {selectedContact?.name[0].toUpperCase()}
+        </Text>
       </View>
-     <Text style={styles.name}>{selectedContact?.name}</Text>
-    <Text style={styles.text}> Name: </Text>
-      <Input control={control} name='name'  />
+      <Text style={styles.name}>{selectedContact?.name}</Text>
+      <Text style={styles.text}> Name: </Text>
+      <Input control={control} name="name" />
       <Text style={styles.text}> Email: </Text>
       <Input control={control} name="email" />
       <Text style={styles.text}> Phone: </Text>
@@ -65,12 +69,19 @@ const EditContactScreen = ({ route }: { route: any }) => {
       <Text style={styles.text}> Address: </Text>
       <Input control={control} name="address" />
       {isLoading ? (
-        <ActivityIndicator style={styles.loading} size="large" color="#0000ff" />
+        <ActivityIndicator
+          style={styles.loading}
+          size="large"
+          color="#0000ff"
+        />
       ) : (
         <>
           {error && <Text style={styles.error}>{error}</Text>}
           <Button title="Update Contact" onPress={handleUpdateContact} />
-          <Button title="Cancel" onPress={() => navigations.navigate('ContactListScreen')} />
+          <Button
+            title="Cancel"
+            onPress={() => navigations.navigate('ContactListScreen')}
+          />
           <Button title="Delete" onPress={handleDeleteContact} />
         </>
       )}
@@ -108,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'flex-start',
-    paddingLeft : 20
+    paddingLeft: 20,
   },
   loading: {
     marginTop: 20,

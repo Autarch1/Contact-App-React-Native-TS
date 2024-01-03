@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {FC} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import {RootStackScreenProps} from '../../navigations/type';
 import {useNavigation} from '@react-navigation/native';
 import {AddContact} from '../../assets/svg';
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop : 30,
-    padding : 20,
+    marginTop: 30,
+    padding: 20,
   },
   contactInput: {
     backgroundColor: 'white',

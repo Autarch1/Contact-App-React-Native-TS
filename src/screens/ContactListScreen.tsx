@@ -1,79 +1,106 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { useContact } from './hooks/useContact';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {useContact} from './hooks/useContact';
 import ContactSearch from './componenets/ContactSearch';
-import { useState } from 'react';
-import { RootStackScreenProps } from '../navigations/type';
-import { useNavigation } from '@react-navigation/native';
+import {useState} from 'react';
+import {RootStackScreenProps} from '../navigations/type';
+import {useNavigation} from '@react-navigation/native';
+
+type Contact = {
+  id: number;
+  name: string;
+  phone: string;
+  address: string;
+  email: string;
+  isFavorite: boolean;
+};
 
 type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 
 const ContactListScreen = () => {
-  const { data, onStatusHandler } = useContact();
+  const {data, onStatusHandler} = useContact();
   const [filterContact, setFilterContact] = useState(data);
 
   const navigation = useNavigation<Navigation>();
-
-  const sortAndGroupContacts = (contacts: any[] | undefined) => {
+  const sortAndGroupContacts = <T extends Contact>(
+    contacts: T[] | undefined,
+  ) => {
     const sortedContacts =
       contacts?.sort((a, b) => {
         if (a.isFavorite && !b.isFavorite) {
-          return -1; // A is favorite, but B is not, so A comes first
+          return -1;
         } else if (!a.isFavorite && b.isFavorite) {
-          return 1; // B is favorite, but A is not, so B comes first
+          return 1;
         } else {
-          return a.name.localeCompare(b.name); // Both have the same favorite status, sort by name
+          return a.name.localeCompare(b.name);
         }
       }) || [];
-  
-    const groupedContacts = sortedContacts.reduce((result, contact) => {
+
+    const favoriteContacts = sortedContacts.filter(
+      contact => contact.isFavorite,
+    );
+    const nonFavoriteContacts = sortedContacts.filter(
+      contact => !contact.isFavorite,
+    );
+
+    const groupedContacts = nonFavoriteContacts.reduce((result, contact) => {
       const firstLetter = contact.name[0].toUpperCase();
       result[firstLetter] = result[firstLetter] || [];
       result[firstLetter].push(contact);
       return result;
-    }, {});
-  
-    return Object.entries(groupedContacts);
+    }, {} as Record<string, T[]>);
+
+    const finalGroupedContacts = {
+      Favorite: favoriteContacts,
+      ...groupedContacts,
+    };
+
+    return Object.entries(finalGroupedContacts) as [string, T[]][];
   };
-  
+
   const handleSearch = (input: string) => {
-    const searchText = input.toLowerCase();
+    const searchText = input.toLowerCase(); // Convert the input to lowercase to make it case-insensitive
 
     const filteredContacts = data?.filter(contact => {
-      const lowerCaseName = contact.name.toLowerCase();
-      const phoneNumber = contact.phone;
+      // Filter the contacts by name or phone number
+      const lowerCaseName = contact.name.toLowerCase(); // Convert the name to lowercase to make it case-insensitive
+      const phoneNumber = contact.phone; // Get the phone number
 
       return (
-        lowerCaseName.includes(searchText) || phoneNumber.includes(searchText)
+        lowerCaseName.includes(searchText) || phoneNumber.includes(searchText) // Check if the name or phone number includes the search text
       );
     });
 
-    setFilterContact(filteredContacts || []);
+    setFilterContact(filteredContacts || []); // Update the filtered contacts
   };
 
-  const toggleStatusHandler = async (id: number, isFavorite : boolean) => {
+  const toggleStatusHandler = async (id: number, isFavorite: boolean) => {
+    // Toggle the favorite status of the contact
     try {
-      await onStatusHandler(id, isFavorite);
+      await onStatusHandler(id, isFavorite); // Call the onStatusHandler function from the useContact hook
     } catch (error) {
-      console.error('Error updating contact:', error);
+      console.error('Error updating contact:', error); // Log the error
     }
-  }
-  
-  const handleEditContact = (id: number) => {
-    navigation.navigate('ContactEditScreen', { id });
-    console.log(id);
   };
 
-  const groupedContacts = sortAndGroupContacts(filterContact || data);
+  const handleEditContact = (id: number) => {
+    // Navigate to the ContactEditScreen
+    navigation.navigate('ContactEditScreen', {id}); // Pass the contact ID as a parameter
+    console.log(id); // Log the contact ID
+  };
+
+  const groupedContacts = sortAndGroupContacts(filterContact || data); // Group the contacts alphabetically by the first letter of the name
 
   return (
-    <View style={{flex : 1}}>
+    <View style={{flex: 1, backgroundColor: '#020617'}}>
       <ContactSearch handleSearch={handleSearch} />
-      <View style={{ padding: 10 }}>
+      <View style={{padding: 10, backgroundColor: 'white'}}>
         <FlatList
           data={groupedContacts}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <View
               style={{
                 borderBottomWidth: 0.5,
@@ -81,13 +108,11 @@ const ContactListScreen = () => {
                 padding: 10,
                 margin: 5,
               }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                {item[0]}
-              </Text>
+              <Text style={{fontSize: 18, fontWeight: '600'}}>{item[0]}</Text>
               <FlatList
                 data={item[1]}
-                renderItem={({ item }) => (
-                  <View style={{ padding: 10 }}>
+                renderItem={({item}) => (
+                  <View style={{padding: 10}}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row',
@@ -95,9 +120,11 @@ const ContactListScreen = () => {
                         alignItems: 'flex-end',
                       }}
                       onPress={() => handleEditContact(item.id)}>
-                      <Text style={{ fontSize: 20 }}>{item.name}</Text>
+                      <Text style={{fontSize: 20}}>{item.name}</Text>
                       <TouchableOpacity
-                        onPress={() => toggleStatusHandler(item.id, item.isFavorite)}>
+                        onPress={() =>
+                          toggleStatusHandler(item.id, item.isFavorite)
+                        }>
                         {item.isFavorite ? <Text>★</Text> : <Text>☆</Text>}
                       </TouchableOpacity>
                     </TouchableOpacity>

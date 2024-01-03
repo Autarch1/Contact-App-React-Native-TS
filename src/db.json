@@ -5,24 +5,24 @@
       "name": "Yephone Aung",
       "email": "yephoneaung33002@gmail.com",
       "phone": "09420320685",
-      "address": "Yangon Insein",
-      "isFavorite": false
+      "address": "Insein Yangon ",
+      "isFavorite": true
     },
     {
       "id": 62322,
-      "name": "Phyo Wai Yan",
+      "name": "Phyo Wai Yan Lin Zaw",
       "email": "Phyolay42@gmail.com",
       "phone": "0921221421",
       "address": "North Dagon",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": 29298,
-      "name": "Ro",
+      "name": "R-18",
       "email": "Ro24@gmail.com",
       "phone": "0958581224",
       "address": "Asdad",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": 78698,
@@ -58,7 +58,7 @@
     },
     {
       "id": 73493,
-      "name": "Hsu",
+      "name": "Hsu Love Phyo",
       "email": "Hsu01@gmail.com",
       "phone": "09123124141",
       "address": "DD",
@@ -70,7 +70,7 @@
       "email": "Bae@gmail.com",
       "phone": "09785077503",
       "address": "North Oakala Pa",
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": 72738,
@@ -94,7 +94,7 @@
       "email": "KoZawGyi123@gmail.com",
       "phone": "0977594215",
       "address": "Hlaing Yangon",
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": 18717,
@@ -102,6 +102,30 @@
       "email": "Alxendar404@gmail.com",
       "phone": "09421132935",
       "address": "San Chaung",
+      "isFavorite": false
+    },
+    {
+      "id": 68284,
+      "name": "Hey-There",
+      "email": "Hello34@gmail.com",
+      "phone": "094275891",
+      "address": "Landon",
+      "isFavorite": false
+    },
+    {
+      "id": 21355,
+      "name": "Ace301",
+      "email": "Ace124@gmal.com",
+      "phone": "097654231",
+      "address": "Hlaing",
+      "isFavorite": false
+    },
+    {
+      "id": 59057,
+      "name": "God",
+      "email": "God@gmail.com",
+      "phone": "09567414513",
+      "address": "Heaven",
       "isFavorite": false
     }
   ]

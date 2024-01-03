@@ -24,6 +24,7 @@ const EditContactScreen = ({ route }: { route: any }) => {
     }
   }, [selectedContact, setValue]);
 
+    
   const handleUpdateContact = async () => {
     try {
       setIsLoading(true);

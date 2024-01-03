@@ -6,7 +6,8 @@ interface Contact {
     name : string,
     email : string,
     phone : string,
-    address : string
+    address : string,
+    isFavorite : boolean
 }
 
 const initialState : Contact[] = [];

@@ -5,84 +5,104 @@
       "name": "Yephone Aung",
       "email": "yephoneaung33002@gmail.com",
       "phone": "09420320685",
-      "address": "Yangon Insein "
+      "address": "Yangon Insein",
+      "isFavorite": false
     },
     {
       "id": 62322,
-      "name": "PhyoWai Yan",
+      "name": "Phyo Wai Yan",
       "email": "Phyolay42@gmail.com",
       "phone": "0921221421",
-      "address": "North Dagon"
-    },
-    {
-      "id": 95131,
-      "name": "Zaw Lin Shein",
-      "email": "ZawGyi301@gmail.com",
-      "phone": "09421132938",
-      "address": "Asda"
-    },
-    {
-      "id": 95903,
-      "name": "Taw Thar Lay par 123",
-      "email": "Tawthar@gmail.com",
-      "phone": "09421095952",
-      "address": "It’s ok Not to be ok"
+      "address": "North Dagon",
+      "isFavorite": false
     },
     {
       "id": 29298,
       "name": "Ro",
       "email": "Ro24@gmail.com",
       "phone": "0958581224",
-      "address": "Asdad"
+      "address": "Asdad",
+      "isFavorite": false
     },
     {
       "id": 78698,
-      "name": "Meant Thin Mon",
+      "name": "Myant Thin MOn",
       "email": "Myant@gmail.com",
       "phone": "09785077506",
-      "address": "North OaklaPa"
+      "address": "North OaklaPa",
+      "isFavorite": false
     },
     {
       "id": 60757,
       "name": "Ko Htet",
       "email": "Htet@gmail.com",
       "phone": "09958797095",
-      "address": "Insein"
+      "address": "Insein",
+      "isFavorite": false
     },
     {
       "id": 3159,
       "name": "Rose",
       "email": "Rose@gmail.com",
       "phone": "091312515232",
-      "address": "South Korea "
+      "address": "South Korea ",
+      "isFavorite": false
     },
     {
       "id": 69719,
       "name": "Thir Mayo Swe",
       "email": "Scarlett@gmail.com",
       "phone": "09262747095",
-      "address": "Insein Budaryone Road"
+      "address": "Insein Budaryone Road",
+      "isFavorite": false
     },
     {
       "id": 73493,
       "name": "Hsu",
       "email": "Hsu01@gmail.com",
       "phone": "09123124141",
-      "address": "DD"
+      "address": "DD",
+      "isFavorite": false
     },
     {
       "id": 52882,
       "name": "Bae",
       "email": "Bae@gmail.com",
       "phone": "09785077503",
-      "address": "North Oakala Pa"
+      "address": "North Oakala Pa",
+      "isFavorite": true
     },
     {
       "id": 72738,
       "name": "Ve",
       "email": "Veve@gmail.com",
       "phone": "09785077509",
-      "address": "Hlaing Thar Yar"
+      "address": "Hlaing Thar Yar",
+      "isFavorite": false
+    },
+    {
+      "id": 19156,
+      "name": "Sandi",
+      "email": "Sandi@gmail.com",
+      "phone": "0921428912",
+      "address": "Tha Mine",
+      "isFavorite": false
+    },
+    {
+      "id": 31381,
+      "name": "Zaw Lin Shein",
+      "email": "KoZawGyi123@gmail.com",
+      "phone": "0977594215",
+      "address": "Hlaing Yangon",
+      "isFavorite": true
+    },
+    {
+      "id": 18717,
+      "name": "Alexandar",
+      "email": "Alxendar404@gmail.com",
+      "phone": "09421132935",
+      "address": "San Chaung",
+      "isFavorite": false
     }
   ]
 }

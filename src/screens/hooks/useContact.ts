@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addContact, deleteContact, editContact, getContacts } from '../../api/contact';
+import { addContact, deleteContact, editContact, favoriteStatusContact, getContacts } from '../../api/contact';
 import z from 'zod';
 import { queryClient } from '../../utils/queryClient';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -17,6 +17,7 @@ const schema = z.object({
         .regex(/^[0-9]+$/, { message: 'Phone number must be numeric' })
         ,
     address: z.string(),
+    isFavorite : z.boolean()
 });
 
 type FormField = z.infer<typeof schema>;
@@ -33,6 +34,7 @@ export const useContact = () => {
             email: '',
             phone: '',
             address: '',
+            isFavorite : false
         },
         resolver: zodResolver(schema),
     });
@@ -100,6 +102,28 @@ export const useContact = () => {
         }
     }
 
+    const {mutateAsync : statusContact} = useMutation({
+        mutationKey : ['favoriteContact'],
+        mutationFn : favoriteStatusContact,
+        onError : error => {
+            console.log(error)
+        },
+        onSuccess : async data => {
+            return await queryClient.invalidateQueries({queryKey : ['contacts']})
+        }
+    })
+
+    const onStatusHandler = async (id: number, isFavorite: boolean) => {
+            try {
+                await statusContact({ id, isFavorite });
+            } catch (error) {
+                console.error('Error status contact:', error);
+            }
+        }
+        
+
+
+
     const addContactHandler = handleSubmit(onSubmitHandler);
     const updateContatHandler = handleSubmit(onEidtHandler)
     return {
@@ -111,5 +135,6 @@ export const useContact = () => {
         reset,
         updateContatHandler,
         onDeleteHandler,
+        onStatusHandler
     };
 };

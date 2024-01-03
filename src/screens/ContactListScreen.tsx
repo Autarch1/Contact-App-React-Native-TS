@@ -10,25 +10,33 @@ type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 
 const ContactListScreen = () => {
-  const { data } = useContact();
+  const { data, onStatusHandler } = useContact();
   const [filterContact, setFilterContact] = useState(data);
 
   const navigation = useNavigation<Navigation>();
 
   const sortAndGroupContacts = (contacts: any[] | undefined) => {
     const sortedContacts =
-      contacts?.sort((a, b) => a.name.localeCompare(b.name)) || [];
-
+      contacts?.sort((a, b) => {
+        if (a.isFavorite && !b.isFavorite) {
+          return -1; // A is favorite, but B is not, so A comes first
+        } else if (!a.isFavorite && b.isFavorite) {
+          return 1; // B is favorite, but A is not, so B comes first
+        } else {
+          return a.name.localeCompare(b.name); // Both have the same favorite status, sort by name
+        }
+      }) || [];
+  
     const groupedContacts = sortedContacts.reduce((result, contact) => {
       const firstLetter = contact.name[0].toUpperCase();
       result[firstLetter] = result[firstLetter] || [];
       result[firstLetter].push(contact);
       return result;
     }, {});
-
+  
     return Object.entries(groupedContacts);
   };
-
+  
   const handleSearch = (input: string) => {
     const searchText = input.toLowerCase();
 
@@ -44,6 +52,14 @@ const ContactListScreen = () => {
     setFilterContact(filteredContacts || []);
   };
 
+  const toggleStatusHandler = async (id: number, isFavorite : boolean) => {
+    try {
+      await onStatusHandler(id, isFavorite);
+    } catch (error) {
+      console.error('Error updating contact:', error);
+    }
+  }
+  
   const handleEditContact = (id: number) => {
     navigation.navigate('ContactEditScreen', { id });
     console.log(id);
@@ -73,8 +89,17 @@ const ContactListScreen = () => {
                 renderItem={({ item }) => (
                   <View style={{ padding: 10 }}>
                     <TouchableOpacity
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-end',
+                      }}
                       onPress={() => handleEditContact(item.id)}>
                       <Text style={{ fontSize: 20 }}>{item.name}</Text>
+                      <TouchableOpacity
+                        onPress={() => toggleStatusHandler(item.id, item.isFavorite)}>
+                        {item.isFavorite ? <Text>★</Text> : <Text>☆</Text>}
+                      </TouchableOpacity>
                     </TouchableOpacity>
                   </View>
                 )}

@@ -1,5 +1,6 @@
 import { Axios, AxiosResponse } from "axios";
 import { axiosInstance } from "../utils/axiosInstance";
+import { MutateOptions } from "@tanstack/react-query";
 
 export type Contact = {
     id: number;
@@ -7,6 +8,7 @@ export type Contact = {
     email: string;
     phone: string;
     address: string;
+    isFavorite: boolean;
 }
 
 export const getContacts = async () =>{
@@ -48,3 +50,16 @@ export const deleteContact = async (id : number) =>{
         throw new Error("Error while deleting contact");
     }
 }
+
+export const favoriteStatusContact = async ({ id, isFavorite }: MutateOptions<Contact, Error, number, unknown> & { id: number; isFavorite: boolean }) => {
+        try {
+            const response: AxiosResponse<Contact> = await axiosInstance.patch(`/contact/${id}`, { isFavorite: !isFavorite });
+    
+            return response.data;
+        } catch (error) {
+            console.error("Error while updating contact status:", error);
+            throw new Error("Error while updating contact status");
+        }
+};
+  
+

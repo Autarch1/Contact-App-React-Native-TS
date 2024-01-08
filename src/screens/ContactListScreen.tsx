@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
-import {useContact} from './hooks/useContact';
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import { useContact } from './hooks/useContact';
 import ContactSearch from './componenets/ContactSearch';
-import {useState} from 'react';
-import {RootStackScreenProps} from '../navigations/type';
-import {useNavigation} from '@react-navigation/native';
+import { useState } from 'react';
+import { RootStackScreenProps } from '../navigations/type';
+import { useNavigation } from '@react-navigation/native';
 
 type Contact = {
   id: number;
@@ -21,7 +26,7 @@ type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 
 const ContactListScreen = () => {
-  const {data, onStatusHandler} = useContact();
+  const { data, onStatusHandler } = useContact();
   const [filterContact, setFilterContact] = useState(data);
 
   const navigation = useNavigation<Navigation>();
@@ -48,8 +53,8 @@ const ContactListScreen = () => {
 
     const groupedContacts = nonFavoriteContacts.reduce((result, contact) => {
       const firstLetter = contact.name[0].toUpperCase();
-      result[firstLetter] = result[firstLetter] || [];
-      result[firstLetter].push(contact);
+      result[firstLetter] = result[firstLetter] || []; // Create an empty array if it doesn't exist
+      result[firstLetter].push(contact); // Push the contact to the array
       return result;
     }, {} as Record<string, T[]>);
 
@@ -88,19 +93,19 @@ const ContactListScreen = () => {
 
   const handleEditContact = (id: number) => {
     // Navigate to the ContactEditScreen
-    navigation.navigate('ContactEditScreen', {id}); // Pass the contact ID as a parameter
+    navigation.navigate('ContactEditScreen', { id }); // Pass the contact ID as a parameter
     console.log(id); // Log the contact ID
   };
 
   const groupedContacts = sortAndGroupContacts(filterContact || data); // Group the contacts alphabetically by the first letter of the name
 
   return (
-    <View style={{flex: 1, backgroundColor: '#020617'}}>
+    <View style={{ flex: 1, backgroundColor: '#020617' }}>
       <ContactSearch handleSearch={handleSearch} />
-      <View style={{padding: 10, backgroundColor: 'white'}}>
+      <View style={{ padding: 10, backgroundColor: 'white' }}>
         <FlatList
           data={groupedContacts}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <View
               style={{
                 borderBottomWidth: 0.5,
@@ -108,11 +113,11 @@ const ContactListScreen = () => {
                 padding: 10,
                 margin: 5,
               }}>
-              <Text style={{fontSize: 18, fontWeight: '600'}}>{item[0]}</Text>
+              <Text style={{ fontSize: 18, fontWeight: '600' }}>{item[0]}</Text>
               <FlatList
                 data={item[1]}
-                renderItem={({item}) => (
-                  <View style={{padding: 10}}>
+                renderItem={({ item }) => (
+                  <View style={{ padding: 10 }}>
                     <TouchableOpacity
                       style={{
                         flexDirection: 'row',
@@ -120,7 +125,7 @@ const ContactListScreen = () => {
                         alignItems: 'flex-end',
                       }}
                       onPress={() => handleEditContact(item.id)}>
-                      <Text style={{fontSize: 20}}>{item.name}</Text>
+                      <Text style={{ fontSize: 20 }}>{item.name}</Text>
                       <TouchableOpacity
                         onPress={() =>
                           toggleStatusHandler(item.id, item.isFavorite)

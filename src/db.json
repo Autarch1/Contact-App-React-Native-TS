@@ -22,15 +22,15 @@
       "email": "Ro24@gmail.com",
       "phone": "0958581224",
       "address": "Asdad",
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": 78698,
-      "name": "Myant Thin MOn",
+      "name": "Myant Thin Mon",
       "email": "Myant@gmail.com",
-      "phone": "09785077506",
+      "phone": "09891394786",
       "address": "North OaklaPa",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": 60757,
@@ -58,10 +58,10 @@
     },
     {
       "id": 73493,
-      "name": "Hsu Love Phyo",
+      "name": "HSU 许",
       "email": "Hsu01@gmail.com",
       "phone": "09123124141",
-      "address": "DD",
+      "address": "North Dagon",
       "isFavorite": false
     },
     {
@@ -98,26 +98,10 @@
     },
     {
       "id": 18717,
-      "name": "Alexandar",
-      "email": "Alxendar404@gmail.com",
+      "name": "AxiosInstance",
+      "email": "AxiosIs404Mr@gmail.com",
       "phone": "09421132935",
       "address": "San Chaung",
-      "isFavorite": false
-    },
-    {
-      "id": 68284,
-      "name": "Hey-There",
-      "email": "Hello34@gmail.com",
-      "phone": "094275891",
-      "address": "Landon",
-      "isFavorite": false
-    },
-    {
-      "id": 21355,
-      "name": "Ace301",
-      "email": "Ace124@gmal.com",
-      "phone": "097654231",
-      "address": "Hlaing",
       "isFavorite": false
     },
     {
@@ -126,6 +110,14 @@
       "email": "God@gmail.com",
       "phone": "09567414513",
       "address": "Heaven",
+      "isFavorite": false
+    },
+    {
+      "id": 36732,
+      "name": "CutTheCrap",
+      "email": "Ctc@gmail.com",
+      "phone": "0978564365",
+      "address": "Homeless",
       "isFavorite": false
     }
   ]

@@ -16,7 +16,7 @@ import {RootStackScreenProps} from '../../navigations/type';
 import {useNavigation} from '@react-navigation/native';
 const schema = z.object({
   id: z.number(),
-  name: z.string(),
+  name: z.string({required_error: 'Name is required'}),
   email: z.string().email({message: 'Please enter a valid email address'}),
   phone: z
     .string({required_error: 'Phone number is required'})

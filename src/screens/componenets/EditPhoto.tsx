@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import  { FC, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFS from 'react-native-fs';
+
 
 type EditPhotoProps = {
   photo: string | null;
@@ -9,8 +10,9 @@ type EditPhotoProps = {
 };
 
 const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
-  const [isEditing, setIsEditing] = useState(false);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const handleChooseImage = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -24,7 +26,10 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
       if (image) {
         const base64Image = await getBase64FromFilePath(image.path);
         const imageData = `data:${image.mime};base64,${base64Image}`;
+        setSelectedImage(imageData);
         onPhotoUpdated(imageData);
+
+
       }
     } catch (error) {
       console.error(error);
@@ -43,18 +48,30 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
     }
   };
 
+  const handleRemoveImage = () => {
+    setSelectedImage(null);
+    onPhotoUpdated(null);
+  }
 
+
+  useEffect(() => {
+    setSelectedImage(photo);
+  }, [photo]);
+
+
+  
 
   return (
     <View style={styles.container}>
       {!isEditing && (
         <TouchableOpacity onPress={() => setIsEditing(true)}>
-          {photo ? (
-            <Image source={{ uri: photo }} style={styles.avatarContainer} />
+          {selectedImage ? (
+            <Image source={{ uri: selectedImage }} style={styles.avatarContainer} />
           ) : (
             <View style={styles.avatarContainer}>
               <Text style={styles.avatarText}>
-                {photo ? photo[0].toUpperCase() : 'Add Photo'}
+                {photo? photo[0].toUpperCase() : 'Add Photo'}
+
               </Text>
             </View>
           )}
@@ -74,6 +91,14 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
               <Text style={styles.editOptionText}>Cancel</Text>
             </View>
           </TouchableOpacity>
+
+          {selectedImage && (
+            <TouchableOpacity onPress={handleRemoveImage}>
+              <View style={styles.editOption}>
+                <Text style={styles.editOptionText}>Remove</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
       )}
     </View>

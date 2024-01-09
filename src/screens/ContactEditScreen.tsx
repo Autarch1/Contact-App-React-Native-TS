@@ -242,15 +242,16 @@ const EditContactScreen = ({ route }: { route: props }) => {
 
 
  
+
+ 
   return (
     <View style={styles.container}>
       <ScrollView>
         <EditPhoto
-          photo={selectedContact?.photo || null}
+          photo={selectedContact?.photo!}
           onPhotoUpdated={(photo) => setValue('photo', photo!)}
         />
 
-        {/* <Text style={styles.name}>{selectedContact?.name}</Text> */}
         <Text style={styles.text}> Name: </Text>
         <Input control={control} name="name" />
         <Text style={styles.text}> Email: </Text>

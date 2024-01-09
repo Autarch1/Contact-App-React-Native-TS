@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {View, Button, Image, StyleSheet} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFS from 'react-native-fs';
@@ -75,7 +75,7 @@ type Props = {
   onImageSelected: (photo: string | null) => void;
 };
 
-const AddPhoto = ({onImageSelected}: Props) => {
+const AddPhoto : FC<Props> = ({onImageSelected}) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleChooseImage = async () => {

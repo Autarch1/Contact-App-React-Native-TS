@@ -6,7 +6,7 @@ import Input from '../app/input';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackScreenProps} from '../navigations/type';
 import AddPhoto from './componenets/PhotoAdd';
-import ImagePicker from 'react-native-image-crop-picker';
+
 
 type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
@@ -18,7 +18,6 @@ const AddContactScreen: React.FC = () => {
   const handleAddContact = async () => {
     try {
       await addContactHandler();
-      // console.log('Photo Data:', selectedPhoto);
     } catch (error) {
       console.error('Error adding contact:', error);
       throw error;
@@ -64,11 +63,3 @@ const styles = StyleSheet.create({
   },
 });
 export default AddContactScreen;
-
-// const AddContactScreen = () => {
-//   return(
-//     <AddPhoto/>
-//   )
-
-// }
-// export default AddContactScreen;

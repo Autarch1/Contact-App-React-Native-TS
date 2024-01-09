@@ -7,6 +7,7 @@ interface Contact {
   phone: string;
   address: string;
   isFavorite: boolean;
+  photo : string;
 }
 
 const initialState: Contact[] = [];

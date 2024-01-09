@@ -1,6 +1,4 @@
-/* eslint-disable no-catch-shadow */
-/* eslint-disable @typescript-eslint/no-shadow */
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {View, Text, Button, ActivityIndicator, StyleSheet} from 'react-native';
 import {useContact} from './hooks/useContact';
 import Input from '../app/input';
@@ -9,8 +7,12 @@ import {useNavigation} from '@react-navigation/native';
 
 type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
-
-const EditContactScreen = ({route}: {route: any}) => {
+type props = {
+  params: {
+    id: number;
+  };
+}
+const EditContactScreen = ( {route} : {route : props}) => {
   const {id} = route.params;
   const {control, setValue, data, updateContatHandler, onDeleteHandler} =
     useContact();

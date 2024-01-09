@@ -100,7 +100,7 @@ const ContactListScreen = () => {
   const groupedContacts = sortAndGroupContacts(filterContact || data); // Group the contacts alphabetically by the first letter of the name
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#020617' }}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <ContactSearch handleSearch={handleSearch} />
       <View style={{ padding: 10, backgroundColor: 'white' }}>
         <FlatList

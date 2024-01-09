@@ -26,11 +26,11 @@ const ContactSearch: FC<ContactSearchProps> = ({handleSearch}) => {
       />
 
       <AddContact
-        width={100}
+        width={45}
         height={50}
         onPress={() => {
           navigation.navigate('ContactAddScreen');
-          console.log('Pressed');
+          console.log('You are in contact add screen');
         }}
       />
     </View>

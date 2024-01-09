@@ -1119,6 +1119,17 @@ PODS:
     - React-jsi (= 0.73.1)
     - React-logger (= 0.73.1)
     - React-perflogger (= 0.73.1)
+  - RNFS (2.20.0):
+    - React-Core
+  - RNImageCropPicker (0.40.2):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.40.2)
+    - TOCropViewController
+  - RNImageCropPicker/QBImagePickerController (0.40.2):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController
   - RNPermissions (4.0.1):
     - React-Core
   - RNScreens (3.29.0):
@@ -1128,6 +1139,7 @@ PODS:
   - RNSVG (14.1.0):
     - React-Core
   - SocketRocket (0.6.1)
+  - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1206,6 +1218,8 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNFS (from `../node_modules/react-native-fs`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1226,6 +1240,7 @@ SPEC REPOS:
     - libevent
     - OpenSSL-Universal
     - SocketRocket
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   boost:
@@ -1329,6 +1344,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNScreens:
@@ -1401,12 +1420,15 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 93a4c84e46a85c3fc9678abd4f6923b785226ea7
   React-utils: debda2c206770ee2785bdebb7f16d8db9f18838a
   ReactCommon: ddb128564dcbfa0287d3d1a2d10f8c7457c971f6
-  RNPermissions: ef7f3f5e19224f75aaf068039093b2cf87681eff
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
+  RNImageCropPicker: d9616a0cb9b72e8551ff94a7a5021fbd29050aa5
+  RNPermissions: d0f576cb779f84d64b96932268462bd50f5d0e1c
   RNScreens: b582cb834dc4133307562e930e8fa914b8c04ef2
   RNSVG: ba3e7232f45e34b7b47e74472386cf4e1a676d0a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 4f53dc50008d626fa679c7a1cb4bed898f8c0bde
 
-PODFILE CHECKSUM: 0039550f3b4b4cc50c8de7f291eee2433ba0004b
+PODFILE CHECKSUM: f0df8f55c686a550d6dcc311f9c9e79714c00950
 
 COCOAPODS: 1.14.3

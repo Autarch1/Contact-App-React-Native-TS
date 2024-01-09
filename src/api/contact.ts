@@ -9,6 +9,7 @@ export type Contact = {
   phone: string;
   address: string;
   isFavorite: boolean;
+  photo: string;
 };
 
 export const getContacts = async () => {

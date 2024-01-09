@@ -25,6 +25,7 @@ const schema = z.object({
     .regex(/^[0-9]+$/, {message: 'Phone number must be numeric'}),
   address: z.string(),
   isFavorite: z.boolean(),
+  photo : z.string(),
 });
 
 type FormField = z.infer<typeof schema>;
@@ -42,6 +43,7 @@ export const useContact = () => {
       phone: '',
       address: '',
       isFavorite: false,
+      photo: '',
     },
     resolver: zodResolver(schema),
   });
@@ -89,19 +91,21 @@ export const useContact = () => {
 
   const onSubmitHandler: SubmitHandler<FormField> = async value => {
     const id = Math.floor(Math.random() * 100000) + 1;
-
+  
     try {
-      await mutateAsync({...value, id});
+      await mutateAsync({ ...value, id }); // Pass the updated value with the modified photo property
       reset();
       navigation.navigate('ContactListScreen');
     } catch (error) {
       console.error('Error adding contact:', error);
     }
   };
+  
 
   const onEidtHandler: SubmitHandler<FormField> = async value => {
     try {
-      await mutate(value);
+      const photo = value.photo || ''; // Set photo to an empty string if it is null
+      await mutate({ ...value, photo }); // Pass the updated value with the modified photo property
       navigation.navigate('ContactListScreen');
     } catch (error) {
       console.error('Error editing contact:', error);

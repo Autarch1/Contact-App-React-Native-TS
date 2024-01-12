@@ -1,5 +1,5 @@
 import  { FC, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, ActivityIndicator } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFS from 'react-native-fs';
 
@@ -7,12 +7,14 @@ import RNFS from 'react-native-fs';
 type EditPhotoProps = {
   photo: string | null;
   onPhotoUpdated: (photo: string | null) => void;
+  name : string
 };
 
-const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
+const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated, name }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const handleChooseImage = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -51,6 +53,7 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
   const handleRemoveImage = () => {
     setSelectedImage(null);
     onPhotoUpdated(null);
+
   }
 
 
@@ -66,7 +69,9 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
       {!isEditing && (
         <TouchableOpacity onPress={() => setIsEditing(true)}>
           {selectedImage ? (
-            <Image source={{ uri: selectedImage }} style={styles.avatarContainer} />
+            <ImageBackground source={{ uri: selectedImage }} style={styles.avatarContainer} >
+              <Text style={styles.avatarText}> {name}  </Text>
+            </ImageBackground>
           ) : (
             <View style={styles.avatarContainer}>
               <Text style={styles.avatarText}>
@@ -95,7 +100,9 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated }) => {
           {selectedImage && (
             <TouchableOpacity onPress={handleRemoveImage}>
               <View style={styles.editOption}>
+
                 <Text style={styles.editOptionText}>Remove</Text>
+
               </View>
             </TouchableOpacity>
           )}
@@ -111,16 +118,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   avatarContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 350,
+    height: 350,
     backgroundColor: 'lightgrey',
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarText: {
-    fontSize: 24,
+    color: 'white',
+    fontSize: 25,
+    lineHeight: 80,
     fontWeight: 'bold',
+    textAlign: 'center',
+    alignSelf : 'flex-start',
+    //I want the text to be on the bottom left corner of the image
+    position : 'absolute',
+    bottom : 0,
+
+    
   },
   editOptions: {
     marginTop: 10,

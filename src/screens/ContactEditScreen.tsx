@@ -250,6 +250,7 @@ const EditContactScreen = ({ route }: { route: props }) => {
         <EditPhoto
           photo={selectedContact?.photo!}
           onPhotoUpdated={(photo) => setValue('photo', photo!)}
+          name={selectedContact?.name!}
         />
 
         <Text style={styles.text}> Name: </Text>

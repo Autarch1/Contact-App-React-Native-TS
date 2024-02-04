@@ -1,17 +1,24 @@
-import  { FC, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, ActivityIndicator } from 'react-native';
+import {FC, useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFS from 'react-native-fs';
-
-
+import images from '../../assets/image';
 type EditPhotoProps = {
   photo: string | null;
   onPhotoUpdated: (photo: string | null) => void;
-  name : string
+  name: string;
 };
 
-const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated, name }) => {
-
+const EditPhoto: FC<EditPhotoProps> = ({photo, onPhotoUpdated, name}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -30,8 +37,6 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated, name }) => {
         const imageData = `data:${image.mime};base64,${base64Image}`;
         setSelectedImage(imageData);
         onPhotoUpdated(imageData);
-
-
       }
     } catch (error) {
       console.error(error);
@@ -53,30 +58,26 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated, name }) => {
   const handleRemoveImage = () => {
     setSelectedImage(null);
     onPhotoUpdated(null);
-
-  }
-
+  };
 
   useEffect(() => {
     setSelectedImage(photo);
   }, [photo]);
-
-
-  
 
   return (
     <View style={styles.container}>
       {!isEditing && (
         <TouchableOpacity onPress={() => setIsEditing(true)}>
           {selectedImage ? (
-            <ImageBackground source={{ uri: selectedImage }} style={styles.avatarContainer} >
-              <Text style={styles.avatarText}> {name}  </Text>
+            <ImageBackground
+              source={{uri: selectedImage}}
+              style={styles.avatarContainer}>
+              <Text style={styles.avatarText}> {name} </Text>
             </ImageBackground>
           ) : (
             <View style={styles.avatarContainer}>
               <Text style={styles.avatarText}>
-                {photo? photo[0].toUpperCase() : 'Add Photo'}
-
+                <Image source={images.defaultImage} style={styles.image} />
               </Text>
             </View>
           )}
@@ -91,21 +92,17 @@ const EditPhoto: FC<EditPhotoProps> = ({ photo, onPhotoUpdated, name }) => {
             </View>
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={handleRemoveImage}>
+            <View style={styles.editOption}>
+              <Text style={styles.editOptionText}>Remove</Text>
+            </View>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => setIsEditing(false)}>
             <View style={styles.editOption}>
               <Text style={styles.editOptionText}>Cancel</Text>
             </View>
           </TouchableOpacity>
-
-          {selectedImage && (
-            <TouchableOpacity onPress={handleRemoveImage}>
-              <View style={styles.editOption}>
-
-                <Text style={styles.editOptionText}>Remove</Text>
-
-              </View>
-            </TouchableOpacity>
-          )}
         </View>
       )}
     </View>
@@ -130,27 +127,31 @@ const styles = StyleSheet.create({
     lineHeight: 80,
     fontWeight: 'bold',
     textAlign: 'center',
-    alignSelf : 'flex-start',
+    alignSelf: 'flex-start',
     //I want the text to be on the bottom left corner of the image
-    position : 'absolute',
-    bottom : 0,
-
-    
+    position: 'absolute',
+    bottom: 0,
   },
   editOptions: {
-    marginTop: 10,
+    marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    gap: 10,
   },
   editOption: {
     backgroundColor: '#3498db',
     padding: 10,
     borderRadius: 5,
-    margin: 5,
+    marginRight: 10,
   },
   editOptionText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  image: {
+    width: 400,
+    height: 250,
+    borderRadius: 10,
   },
 });
 

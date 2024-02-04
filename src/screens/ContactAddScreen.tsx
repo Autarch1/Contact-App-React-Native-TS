@@ -1,19 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 import {useContact} from './hooks/useContact';
 import Input from '../app/input';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackScreenProps} from '../navigations/type';
 import AddPhoto from './componenets/PhotoAdd';
 
-
 type Props = RootStackScreenProps<'ContactListScreen'>;
 type Navigation = Props['navigation'];
 const AddContactScreen: React.FC = () => {
-  const { control, addContactHandler,setValue } = useContact();
+  const {control, addContactHandler, setValue} = useContact();
   const navigations = useNavigation<Navigation>();
-
 
   const handleAddContact = async () => {
     try {
@@ -25,15 +23,15 @@ const AddContactScreen: React.FC = () => {
   };
 
   return (
-    <View
+    <ScrollView
       style={{
         padding: 10,
         margin: 10,
         gap: 10,
-        marginVertical: 100,
       }}>
-      <AddPhoto onImageSelected={(photo) => setValue('photo',photo!)} />
-      <View></View>
+      <View>
+        <AddPhoto onImageSelected={photo => setValue('photo', photo!)} />
+      </View>
       <View>
         <Text style={styles.text}>Name:</Text>
         <Input control={control} name="name" />
@@ -48,12 +46,8 @@ const AddContactScreen: React.FC = () => {
         <Input control={control} name="address" />
 
         <Button title="Add Contact" onPress={handleAddContact} />
-        <Button
-          title="Cancel"
-          onPress={() => navigations.navigate('ContactListScreen')}
-        />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

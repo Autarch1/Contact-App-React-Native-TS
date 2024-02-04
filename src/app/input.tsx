@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Text, TextInput, View} from 'react-native';
+import {KeyboardAvoidingView, Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {Control, Controller, FieldValues, Path} from 'react-hook-form';
 
@@ -16,7 +16,7 @@ export const Input = (props: Props<any>) => {
       control={control}
       name={name}
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
-        <View>
+        <KeyboardAvoidingView>
           <TextInput
             value={value}
             onChangeText={onChange}
@@ -31,7 +31,7 @@ export const Input = (props: Props<any>) => {
             }}
           />
           <Text style={{color: 'red', fontSize: 16}}>{error?.message}</Text>
-        </View>
+        </KeyboardAvoidingView>
       )}
     />
   );
